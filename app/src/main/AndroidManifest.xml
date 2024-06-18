@@ -13,6 +13,11 @@
         android:theme="@style/Theme.ImcMobileCalculator"
         tools:targetApi="31">
         <activity
+            android:name=".ImcCalculatorActivity"
+            android:exported="false"
+            android:label="@string/title_activity_imc_calculator"
+            android:theme="@style/Theme.ImcMobileCalculator" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ImcMobileCalculator">

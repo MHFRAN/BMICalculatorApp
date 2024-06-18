@@ -4,17 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="32dp"
+    android:paddingHorizontal="16dp"
     tools:context=".MainActivity">
 
-<androidx.appcompat.widget.AppCompatButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+    android:id="@+id/viewMale"
+    android:layout_width="0dp"
+    android:layout_height="150dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="16dp"
+    app:layout_constraintEnd_toStartOf="@+id/viewFemale"
+    app:cardBackgroundColor="@color/background_component_selected"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    />
+    app:cardUseCompatPadding="true"
+    app:layout_constraintStart_toStartOf="parent">
+    </androidx.cardview.widget.CardView>
 
-
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewFemale"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toEndOf="@+id/viewMale"
+        app:cardBackgroundColor="@color/background_component"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
