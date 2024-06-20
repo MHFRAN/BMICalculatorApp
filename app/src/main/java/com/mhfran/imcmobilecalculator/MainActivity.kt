@@ -39,8 +39,19 @@ class MainActivity : AppCompatActivity() {
 
     // Cada vez que pulsemos en Las View llamaremos al método setGenderColor para cambiar el color del fondo
     private fun initListeners() {
-       viewMale.setOnClickListener{ setGenderColor() }
-       viewFemale.setOnClickListener { setGenderColor() }
+       viewMale.setOnClickListener{
+           changeGender() // se llama primero a este para que cambie el color del back dependiendo de si es true o false
+           setGenderColor() }
+       viewFemale.setOnClickListener {
+           changeGender()
+           setGenderColor() }
+    }
+
+    /* Este método se va a llamar antes que el setGenderColor para alternar la selección de género */
+    private fun changeGender(){
+        isMaleSelected = !isMaleSelected
+        isFemaleSelected = !isFemaleSelected
+
     }
 
     /* Llama a la función para saber cuál es el color que está seleccionado */
@@ -61,6 +72,6 @@ class MainActivity : AppCompatActivity() {
     }
     /*  */
     private fun initUI() {
-        TODO("Not yet implemented")
+        setGenderColor()
     }
 }
