@@ -11,6 +11,8 @@
     <string name="male">Hombre</string>
     <string name="female">Mujer</string>
     <string name="height">Altura</string>
+    <string name="weight">Peso</string>
+
 
 
     <string name="lorem_ipsum">

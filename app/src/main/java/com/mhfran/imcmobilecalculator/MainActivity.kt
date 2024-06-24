@@ -1,9 +1,13 @@
 package com.mhfran.imcmobilecalculator
 
+import android.icu.text.DecimalFormat
 import androidx.cardview.widget.CardView
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.slider.RangeSlider
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,9 +20,18 @@ class MainActivity : AppCompatActivity() {
 
     private var isMaleSelected:Boolean = true
     private var isFemaleSelected:Boolean = false
+    private var currentWeight:Int = 60
 
+
+    // lateinit porque la variable no se inicia al declararla, pero se hará antes de su ejecución.
     private lateinit var viewMale:CardView
     private lateinit var viewFemale:CardView
+    private lateinit var tvHeight:TextView
+    private lateinit var rsHeight:RangeSlider
+    private lateinit var btnSubtractWeight:FloatingActionButton
+    private lateinit var btnPlusWeight:FloatingActionButton
+    private lateinit var tvWeight: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,12 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     /*
     1. La función initComponents es un método privado que se encarga de inicializar las View.
-    2. findViewById es una función que busca una vista con el IPD especificado y devuelve una referencia.
+    2. findViewById es una función que busca una vista con el ID especificado y devuelve una referencia.
     3. Al estar las variables declaradas con el modificador "lateinit", deben inicializar antes de su uso.
      */
     private fun initComponents(){
         viewMale = findViewById(R.id.viewMale)
         viewFemale = findViewById(R.id.viewFemale)
+        tvHeight = findViewById(R.id.tvHeight) // buscamos el valor del Texto que va encima del RangeSlader
+        rsHeight = findViewById(R.id.rsHeight)
+        btnSubtractWeight = findViewById(R.id.btnSubtractWeight)
+        btnPlusWeight = findViewById(R.id.btnPlusWeight)
+        tvWeight = findViewById(R.id.tvWeight)
     }
 
     // Cada vez que pulsemos en Las View llamaremos al método setGenderColor para cambiar el color del fondo
@@ -45,6 +63,23 @@ class MainActivity : AppCompatActivity() {
        viewFemale.setOnClickListener {
            changeGender()
            setGenderColor() }
+        rsHeight.addOnChangeListener { _, value, _ -> // cada vez que el usuario cambia el valor del Slider, se actualiza para mostrar el nuevo.
+            val df = DecimalFormat("#.##") // formateamos el número con máximo 2 decimales
+            val result = df.format(value)
+            tvHeight.text = "$result cm"
+        }
+        btnPlusWeight.setOnClickListener{
+            currentWeight += 1
+            setWeight()
+        }
+        btnSubtractWeight.setOnClickListener {
+            currentWeight += -1
+            setWeight()
+        }
+    }
+
+    private fun setWeight() {
+        tvWeight.text = currentWeight.toString()
     }
 
     /* Este método se va a llamar antes que el setGenderColor para alternar la selección de género */
@@ -73,5 +108,6 @@ class MainActivity : AppCompatActivity() {
     /*  */
     private fun initUI() {
         setGenderColor()
+        setWeight()c
     }
 }
