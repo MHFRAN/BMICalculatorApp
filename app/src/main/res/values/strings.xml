@@ -12,7 +12,14 @@
     <string name="female">Mujer</string>
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
+    <string name="age">Edad</string>
+    <string name="btnCalculate">Calcular</string>
 
+    <!-- Descripciones para ser leído por servicios de accesibilidad como TalkBack -->
+
+    <string name="rsHeightDescription">Seleccione la altura</string>
+    <string name="btnPlusWeightDescription">Subir peso</string>
+    <string name="btnSubtractWeightDescription">Bajar peso</string>
 
 
     <string name="lorem_ipsum">
