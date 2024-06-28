@@ -1,5 +1,6 @@
 package com.mhfran.imcmobilecalculator
 
+import android.content.Intent
 import android.icu.text.DecimalFormat
 import androidx.cardview.widget.CardView
 import android.os.Bundle
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPlusAge: FloatingActionButton
     private lateinit var tvAge:TextView
     private lateinit var btnCalculate:Button
+
+    companion object { /* todo lo que haya aquí dentro se puede acceder desde fuera */
+            const val IMC_KEY = "IMC_RESULT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +115,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToResult(result: Double) {
-
+        val intent = Intent(this, ResultIMCActivity::class.java) /* Intent para iniciar la actividad */
+        intent.putExtra(IMC_KEY, result)
+        startActivity(intent)
     }
 
     private fun calculateIMC(): Double {
