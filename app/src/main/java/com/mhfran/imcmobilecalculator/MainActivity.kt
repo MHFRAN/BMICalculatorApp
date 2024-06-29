@@ -1,6 +1,7 @@
 package com.mhfran.imcmobilecalculator
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.icu.text.DecimalFormat
 import androidx.cardview.widget.CardView
 import android.os.Bundle
@@ -8,9 +9,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.RangeSlider
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvAge:TextView
     private lateinit var btnCalculate:Button
 
+
     companion object { /* todo lo que haya aquí dentro se puede acceder desde fuera */
             const val IMC_KEY = "IMC_RESULT"
     }
@@ -51,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         initComponents()
         initListeners() // son las funciones que están escuchando
         initUI() // inicia la interfaz
+        swDarkMode() // inicia el modo oscuro / diurno
     }
 
     /*
@@ -71,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         btnPlusAge = findViewById(R.id.btnPlusAge)
         tvAge = findViewById(R.id.tvAge)
         btnCalculate = findViewById(R.id.btnCalculate)
-
     }
 
     // Cada vez que pulsemos en Las View llamaremos al método setGenderColor para cambiar el color del fondo
@@ -94,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             setWeight()
         }
         btnSubtractWeight.setOnClickListener {
-            currentWeight += -1
+            currentWeight -= 1
             setWeight()
         }
 
@@ -147,7 +153,6 @@ class MainActivity : AppCompatActivity() {
         viewFemale.setCardBackgroundColor(getBackGroundColor(isFemaleSelected))
     }
 
-
     /* Escogemos un color u otro dependiendo si el componente está o no seleccionado */
     private fun getBackGroundColor(isSelectedComponent: Boolean): Int {
         val colorReference = if (isSelectedComponent) {
@@ -163,5 +168,27 @@ class MainActivity : AppCompatActivity() {
         setGenderColor()
         setWeight()
         setAge()
+    }
+
+    private fun swDarkMode(){
+        val swDarkMode = findViewById<SwitchMaterial>(R.id.swDarkMode)
+
+        swDarkMode.setOnCheckedChangeListener { _, isSelected ->
+            if (isSelected){
+                enableDarkMode()
+            }else{
+                disableDarkMode()
+            }
+        }
+    }
+
+    private fun enableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+        delegate.applyDayNight()
+    }
+
+    private fun disableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode((MODE_NIGHT_NO))
+        delegate.applyDayNight()
     }
 }
