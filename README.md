@@ -1,7 +1,7 @@
 # MHFRAN
 
 <p align="center">
-<img src="https://i.imgur.com/Fm0lsHw.png" style="height: 75%; width:75%;"/></center></p>
+<img src="https://i.imgur.com/lo3Xe04.jpg" style="height: 75%; width:75%;"/></center></p>
 
 ## Description
 
